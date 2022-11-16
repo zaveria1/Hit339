@@ -1,0 +1,188 @@
+﻿@using Newtonsoft.Json
+@model MusicLesson.Models.Letters
+
+<form asp-action="Create">
+@{
+    ViewData["Title"] = "Create";
+
+    decimal TotalCost = Convert.ToDecimal(0);
+    var LessonList = new List<Lessons>();
+    int studentID = 0;
+    @if (TempData["LessonDetails"] != null)
+    { 
+        LessonList = JsonConvert.DeserializeObject<List<Lessons>>(TempData["LessonDetails"].ToString());
+        studentID = LessonList[0].StudentID;
+    }
+}
+
+
+<h1>test</h1>
+<hr />
+
+<div class="row">
+    <div class="col-md-8">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Instrument
+                    </th>
+                    <th>
+                        Tutor
+                    </th>
+                    <th>
+                        Duration
+                    </th>
+                    <th>
+                        Lesson Date
+                    </th>
+                    <th>
+                        Term
+                    </th>
+                    <th>
+                        Semester
+                    </th>
+                    <th>
+                        year
+                    </th>
+                    <th>
+                        TermStartDate
+                    </th>
+                    <th>
+                        Cost
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @{
+                    @foreach (var item in LessonList)
+                    {
+                        TotalCost += item.Duration.Cost;
+
+                        <tr>
+                            <td>
+                                @item.Instrument.InstrumentName
+                            </td>
+                            <td>
+                                @item.Tutor.TutorName
+                            </td>
+                            <td>
+                                @item.Duration.Length
+                            </td>
+                            <td>
+                                @item.LessonDateTime.ToShortDateString()
+                            </td>
+                            <td>
+                                @item.Term
+                            </td>
+                            <td>
+                                @item.Semester
+                            </td>
+                            <td>
+                                @item.Year
+                            </td>
+                            <td>
+                                @item.TermStartDate.ToShortDateString()
+                            </td>
+                            <td>
+                                @item.Duration.Cost
+                            </td>
+                        </tr>
+                    }
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            Total:
+                        </td>
+                        <td>
+                            @TotalCost
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+    <div class="col-md-4">
+        
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="BeginningComment" class="control-label"></label>
+                <input asp-for="BeginningComment" class="form-control" />
+                <span asp-validation-for="BeginningComment" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Signature" class="control-label"></label>
+                <input asp-for="Signature" class="form-control" />
+                <span asp-validation-for="Signature" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BankAccount" class="control-label"></label>
+                <input asp-for="BankAccount" class="form-control" />
+                <span asp-validation-for="BankAccount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BSB" class="control-label"></label>
+                <input asp-for="BSB" class="form-control" />
+                <span asp-validation-for="BSB" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AccountNo" class="control-label"></label>
+                <input asp-for="AccountNo" class="form-control" />
+                <span asp-validation-for="AccountNo" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="Term" class="control-label"></label>
+                <select asp-for="Term" class="form-control" asp-items="ViewBag.Term"><option disabled selected> Select a term </option></select>
+                <span asp-validation-for="Term" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Semester" class="control-label"></label>
+                <select asp-for="Semester" class="form-control" asp-items="ViewBag.SemesterList"><option disabled selected> Select a Semester </option><option> 1 </option><option> 2 </option></select>
+                <span asp-validation-for="Semester" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Year" class="control-label"></label>
+                <input asp-for="Year" class="form-control" />
+                <span asp-validation-for="Year" class="text-danger"></span>
+            </div>
+            <input type="Hidden" asp-for="StudentID" value="@studentID" class="form-control" />
+            <input type="Hidden" asp-for="TotalCost" value="@TotalCost" class="form-control" />
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+    
+    </div>
+
+    
+    
+        
+</div>
+
+</form>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
+
+    <script>
+        $(function () {
+            $('#toggle-pay').bootstrapToggle({
+                on: 'Enabled',
+                off: 'Disabled'
+            });
+        })
+    </script>
+}

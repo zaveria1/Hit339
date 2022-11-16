@@ -1,0 +1,46 @@
+﻿@model MusicLesson.Models.Letters
+
+<div>
+    <hr />
+    <dl class="row">
+        Dear @Html.DisplayFor(a => a.student.FirstName),
+        <br />
+        @Html.DisplayFor(model => model.BeginningComment)
+        <br />
+        Welcome to all existing students and new students. Term @Html.DisplayFor(a => a.Term) will commence on @Html.DisplayFor(a => a.TermStartDate)
+        Please ensure your payment is finalised by @Html.DisplayFor(a => a.TermStartDate) If a student is no longer attending
+        lessons, please email the CYCM to be removed off the email list.
+        <br />
+        If paying by Bank Transfer- EFT, please forward a copy of your payment to the office, to follow up
+        and allocate to the student.
+        <br />
+        PAYMENT DETAILS:
+        <br />
+        Ref#: @Html.DisplayFor(a => a.Reference)
+        <br />
+        Student: @Html.DisplayFor(a => a.student.FirstName) &nbsp; @Html.DisplayFor(a => a.student.LastName)
+        <br />
+        Amount: $@Html.DisplayFor(a => a.TotalCost)
+        <br />
+        Alternatively pay via Bank Transfer - EFT - CDU bank details, delete old bank details:
+        <br />
+        <br />
+        New Bank details
+        <br />
+        Bank: @Html.DisplayFor(a => a.BankAccount)
+        <br />
+        Account Name: @Html.DisplayFor(a => a.BankAccount)
+        <br />
+        BSB Number: @Html.DisplayFor(a => a.BSB)
+        <br />
+        Account Number: @Html.DisplayFor(a => a.AccountNo)
+        <br />
+        Reference number: – @Html.DisplayFor(a => a.Reference)
+        <br />
+        The CYCM is committed to providing students with quality lessons in a positive learning environment.
+        <br />
+        Regards,
+        <br />
+
+    </dl>
+</div>
