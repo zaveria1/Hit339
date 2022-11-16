@@ -1,0 +1,122 @@
+﻿@model IList<MusicLesson.Models.Lessons>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@using (Html.BeginForm("DetailData", "Letters", FormMethod.Post))
+ {
+    
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model[0].Student)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model[0].Instrument)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model[0].Tutor)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model[0].Term)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model[0].Semester)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model[0].Year)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model[0].LessonDateTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model[0].Duration)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model[0].Letter.PaymentStatus)
+                </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @for (var i = 0; i < Model.Count(); i++)
+            {
+                <tr>
+                    @Html.HiddenFor(modelItem => Model[i].StudentID)
+                    @Html.HiddenFor(modelItem => Model[i].LessonID)
+                    <th>
+                        @{
+                            Model[i].isChecked = false;
+                                @Html.CheckBoxFor(modelItem => Model[i].isChecked)
+                                @Html.HiddenFor(modelItem => Model[i].isChecked)
+                        }
+
+                    </th>
+                    <td>
+                        @{
+                            var Name = Model[i].Student.FirstName + " " + Model[i].Student.LastName;
+                                @Html.DisplayFor(modelItem => Name)
+                            @Html.HiddenFor(modelItem => Model[i].StudentID)
+                        }
+
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => Model[i].Instrument.InstrumentName)
+                        @Html.HiddenFor(modelItem => Model[i].InstrumentID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model[i].Tutor.TutorName)
+                        @Html.HiddenFor(modelItem => Model[i].TutorID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model[i].Term)
+                        @Html.HiddenFor(modelItem => Model[i].Term)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model[i].Semester)
+                        @Html.HiddenFor(modelItem => Model[i].Semester)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model[i].Year)
+                        @Html.HiddenFor(modelItem => Model[i].Year)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model[i].LessonDateTime)
+                        @Html.HiddenFor(modelItem => Model[i].LessonDateTime)
+                    </td>
+                    <td>
+                        @{
+                            var Duration = Model[i].Duration.Length + " (Cost: " + Model[i].Duration.Cost + ")";
+                                @Html.DisplayFor(modelItem => Duration)
+                            @Html.HiddenFor(modelItem => Model[i].DurationID)
+                        }
+                    </td>
+                    <td>
+                        @{
+                            var PaymentStatus = "Not Paid";
+                            if (Model[i].LetterID != null)
+                            {
+                                if (Model[i].Letter.PaymentStatus == true)
+                                    PaymentStatus = "Paid";
+                            }
+                            @Html.DisplayFor(modelItem => PaymentStatus)
+                            
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    
+
+    <div class="form-group">
+        <input type="submit" value="Submit" class="btn btn-primary" />
+    </div>
+}
+

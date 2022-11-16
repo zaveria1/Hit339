@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MusicLesson.Models.Letters>
+﻿@model IEnumerable<MusicLesson.Models.Instrument>
 
 @{
     ViewData["Title"] = "Index";
@@ -6,32 +6,14 @@
 
 <h1>Index</h1>
 
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Reference)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PaymentStatus)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BeginningComment)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Signature)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BankAccount)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BSB)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AccountNo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TotalCost)
+                @Html.DisplayNameFor(model => model.InstrumentName)
             </th>
             <th></th>
         </tr>
@@ -40,33 +22,12 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Reference)
+                @Html.DisplayFor(modelItem => item.InstrumentName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PaymentStatus)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BeginningComment)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Signature)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BankAccount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BSB)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AccountNo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TotalCost)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.LetterID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.LetterID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.LetterID">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.InstrumentID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.InstrumentID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.InstrumentID">Delete</a>
             </td>
         </tr>
 }
