@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MusicLesson.Models.Instrument>
+﻿@model IEnumerable<MusicLesson.Models.Tutors>
 
 @{
     ViewData["Title"] = "Index";
@@ -13,7 +13,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.InstrumentName)
+                @Html.DisplayNameFor(model => model.TutorName)
             </th>
             <th></th>
         </tr>
@@ -22,12 +22,12 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.InstrumentName)
+                @Html.DisplayFor(modelItem => item.TutorName)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.InstrumentID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.InstrumentID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.InstrumentID">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.TutorID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.TutorID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.TutorID">Delete</a>
             </td>
         </tr>
 }
